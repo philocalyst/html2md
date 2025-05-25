@@ -1,14 +1,9 @@
 extern crate html2md;
 
-use std::io::{self, Read};
+use std::env::args;
 
 fn main() {
-    let stdin = io::stdin();
-    let mut buffer = String::new();
-    let mut handle = stdin.lock();
+    let argument = args().nth(1).unwrap();
 
-    handle
-        .read_to_string(&mut buffer)
-        .expect("Must be readable HTML!");
-    println!("{}", html2md::parse_html(&buffer));
+    println!("{}", html2md::parse_html(&argument));
 }
