@@ -23,15 +23,16 @@ impl CodeHandler {
             "pre" => {
                 if start {
                     printer.insert_newline();
+                    // emit ``` + optional language
+                    printer.append_str("\n```");
+                    if let Some(ref lang) = self.language {
+                        printer.append_str(lang);
+                    }
+                    printer.insert_newline();
                 }
-                // emit ``` + optional language
-                printer.append_str("\n```");
-                if let Some(ref lang) = self.language {
-                    printer.append_str(lang);
-                }
-                printer.append_str("\n");
 
                 if !start {
+                    printer.append_str("\n```");
                     printer.insert_newline();
                 }
             }
